@@ -3,7 +3,9 @@
 one:
   name: Game One
   join_token: test_token_123
+  host: primary
 
 two:
   name: Game Two
   join_token: test_token_1234
+  host: secondary

@@ -1,8 +1,8 @@
 require "test_helper"
 
 class GameTest < ActiveSupport::TestCase
-  test "starts in the lobby with a join token" do
-    game = Game.new(name: "First Game")
+  test "starts with a join token" do
+    game = users(:primary).hosted_games.new(name: "First Game")
 
     assert game.valid?
     assert game.join_token.present?
@@ -16,11 +16,10 @@ class GameTest < ActiveSupport::TestCase
   end
 
   test "generates different join tokens despite same name" do
-    first_game = Game.new(name: "First Game")
-    second_game = Game.new(name: "First Game")
+    first_game = users(:primary).hosted_games.new(name: "First Game")
+    second_game = users(:primary).hosted_games.new(name: "First Game")
 
     assert_equal first_game.name, second_game.name
     assert_not_equal first_game.join_token, second_game.join_token
   end
-
 end
